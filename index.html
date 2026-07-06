@@ -1,0 +1,305 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>J-Anos Graphix — 3D Pre-Visualization</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0A0A0B">
+<style>
+:root{
+  --bg:#0A0A0B; --panel:#141416; --line:#2B2B30; --grid:#17171A;
+  --white:#fff; --hi:#D2D2D5; --mid:#7C7C82;
+  --head:'Segoe UI Black','Arial Black',sans-serif;
+  --mono:'Consolas','Courier New',monospace;
+  --body:'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:74px 74px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono);letter-spacing:1.5px;color:var(--mid);font-size:12px}
+h1,h2,h3{font-family:var(--head);text-transform:uppercase;letter-spacing:.5px;line-height:1.02}
+a{color:inherit;text-decoration:none}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.82);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+nav .logo{font-family:var(--mono);font-weight:700;letter-spacing:2px;color:#fff;font-size:14px}
+nav ul{display:flex;gap:26px;list-style:none}
+nav ul a{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--hi)}
+nav ul a:hover{color:#fff}
+.btn{border:1px solid #fff;color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:1px;
+  padding:9px 16px;display:inline-block;transition:.15s}
+.btn:hover{background:#fff;color:#000}
+
+/* hero */
+.hero{position:relative;padding:96px 0 72px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.kick{font-family:var(--mono);color:var(--hi);letter-spacing:3px;font-size:13px;margin-bottom:22px}
+.hero h1{font-size:58px}
+.hero h1 .g{color:var(--hi)}
+.rule{width:130px;height:2px;background:#fff;margin:26px 0}
+.hero p.sub{color:var(--hi);font-size:17px;max-width:520px}
+.cta-row{margin-top:30px;display:flex;gap:16px;align-items:center}
+.cta{background:#fff;color:#000;font-family:var(--mono);font-weight:700;letter-spacing:1px;
+  font-size:13px;padding:13px 22px;display:inline-block;transition:.15s}
+.cta:hover{background:var(--hi)}
+.framed{position:relative;aspect-ratio:1/1;background:#0e0e10;border:1px solid var(--line)}
+.framed img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(1) contrast(1.05)}
+.brk{position:absolute;width:26px;height:26px;border:2px solid #fff}
+.brk.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.brk.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
+.brk.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
+.brk.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.fig{position:absolute;bottom:10px;left:12px;font-family:var(--mono);font-size:10px;color:var(--mid);letter-spacing:1px;z-index:3}
+.cube{position:absolute;right:-60px;top:20px;width:280px;height:280px;opacity:.5;pointer-events:none}
+
+/* floating 3D logo hero */
+.logo3d{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.logo3d video{width:96%;height:96%;object-fit:contain;position:relative;z-index:2;
+  animation:drift 6s ease-in-out infinite;filter:drop-shadow(0 24px 60px rgba(180,220,200,.16))}
+.logo3d .glow{position:absolute;width:70%;height:70%;border-radius:50%;z-index:1;
+  background:radial-gradient(circle,rgba(120,180,150,.20),rgba(10,10,11,0) 68%);
+  filter:blur(14px);animation:pulse 6s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translateY(-8px)}50%{transform:translateY(8px)}}
+@keyframes pulse{0%,100%{opacity:.7;transform:scale(.96)}50%{opacity:1;transform:scale(1.04)}}
+
+/* strip */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
+.strip .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.strip b{font-weight:600;color:#fff}
+
+/* sections */
+section.pad{padding:82px 0}
+.sec-kick{font-family:var(--mono);color:var(--hi);letter-spacing:2px;font-size:12px;margin-bottom:14px}
+h2.big{font-size:38px;margin-bottom:38px}
+
+/* services grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);padding:26px 26px 30px;position:relative}
+.card .no{font-family:var(--mono);color:var(--mid);font-size:13px}
+.card h3{font-size:20px;margin:8px 0 8px}
+.card p{color:var(--hi);font-size:14px}
+.card::before{content:"";position:absolute;top:0;left:0;width:44px;height:2px;background:#fff}
+
+/* work gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{position:relative}
+.tile .shot{position:relative;aspect-ratio:4/3;overflow:hidden;background:#0e0e10;border:1px solid var(--line)}
+.tile.feat{grid-column:span 2;grid-row:span 2}
+.tile.feat .shot{aspect-ratio:auto;height:100%}
+.tile .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tile:hover .shot img{transform:scale(1.05)}
+.workcap{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--hi);margin-top:10px}
+.workcap b{color:#fff;font-weight:400}
+/* motion reels */
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.vtile{position:relative}
+.vtile .shot{position:relative;aspect-ratio:9/16;overflow:hidden;background:#0e0e10;border:1px solid var(--line)}
+.vtile video{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:10px;left:10px;z-index:3;font-family:var(--mono);font-size:9px;letter-spacing:1px;
+  color:#fff;background:rgba(10,10,11,.7);border:1px solid var(--line);padding:3px 7px}
+.subhead{font-family:var(--mono);color:var(--hi);letter-spacing:2px;font-size:12px;margin:46px 0 16px}
+.featreel{margin-bottom:16px}
+.featreel .shot{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0e0e10;border:1px solid var(--line)}
+.featreel video{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:760px){.tile.feat{grid-column:span 1;grid-row:span 1}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{border-top:2px solid #fff;padding-top:16px}
+.step .n{font-family:var(--head);font-size:34px}
+.step h4{font-family:var(--mono);letter-spacing:1px;margin:6px 0;font-size:15px;color:#fff}
+.step p{color:var(--hi);font-size:13px}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tier{background:var(--panel);border:1px solid var(--line);padding:28px 26px}
+.tier.feat{border-top:3px solid #fff}
+.tier .no{font-family:var(--mono);color:var(--mid);font-size:12px}
+.tier h3{font-size:18px;margin:10px 0 6px}
+.tier .price{font-family:var(--mono);font-size:26px;color:#fff;margin-bottom:16px}
+.tier hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.tier li{list-style:none;color:var(--hi);font-size:13px;margin-bottom:9px}
+.tier li::before{content:"+  ";color:var(--mid);font-family:var(--mono)}
+
+/* cta band */
+.band{border-top:1px solid var(--line);padding:86px 0}
+.band h2{font-size:46px}
+.band .contact{font-family:var(--mono);color:#fff;margin-top:22px;font-size:16px;letter-spacing:1px}
+
+footer{border-top:1px solid var(--line);padding:26px 0}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}
+.social{display:flex;gap:10px}
+.social a{width:38px;height:38px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--hi);transition:.15s}
+.social a:hover{background:#fff;color:#000;border-color:#fff}
+.social svg{width:17px;height:17px;fill:currentColor;display:block}
+/* contact-section social variant */
+.contact-social{margin-top:24px}
+
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}.hero h1{font-size:40px}
+  .grid2,.work,.steps,.tiers{grid-template-columns:1fr}
+  nav ul{display:none}
+}
+</style>
+
+<nav><div class="wrap">
+  <div class="logo">J-ANOS//GRAPHIX</div>
+  <ul>
+    <li><a href="#work">WORK</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="#process">PROCESS</a></li>
+    <li><a href="#pricing">PRICING</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <a class="btn" href="#contact">GET A QUOTE</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <div class="kick">// 3D PRE-VISUALIZATION STUDIO</div>
+    <h1>THE 3D PRE-<br>VISUALIZATION<br><span class="g">EXPERT</span></h1>
+    <div class="rule"></div>
+    <p class="sub">Photoreal product renders, exploded technical views, infinite color variants and cinematic ad loops — built in 3D before a single sample is shipped.</p>
+    <div class="cta-row">
+      <a class="cta" href="#contact">SEE YOUR PRODUCT IN 3D →</a>
+      <span class="mono">FOR D2C E-COMMERCE BRANDS</span>
+    </div>
+  </div>
+  <div class="logo3d">
+    <span class="glow"></span>
+    <video autoplay muted loop playsinline>
+      <source src="logo.webm" type="video/webm">
+      <source src="logo.mp4" type="video/mp4">
+    </video>
+    <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span>
+    <span class="fig">// J-ANOS_MARK // LIVE_RENDER</span>
+  </div>
+  <svg class="cube" viewBox="0 0 100 100" fill="none" stroke="#2B2B30" stroke-width="1">
+    <rect x="20" y="30" width="45" height="45"/><rect x="35" y="15" width="45" height="45"/>
+    <line x1="20" y1="30" x2="35" y2="15"/><line x1="65" y1="30" x2="80" y2="15"/>
+    <line x1="65" y1="75" x2="80" y2="60"/><line x1="20" y1="75" x2="35" y2="60"/>
+  </svg>
+</div></header>
+
+<div class="strip"><div class="wrap">
+  <div><b>Launch, scale & advertise before you ever ship a sample.</b></div>
+  <div class="mono">// WORKFLOW: BLENDER · SKETCHUP · CYCLES</div>
+</div></div>
+
+<section class="pad" id="services"><div class="wrap">
+  <div class="sec-kick">// WHAT I BUILD</div>
+  <h2 class="big">Four Services. One Digital Twin.</h2>
+  <div class="grid2">
+    <div class="card"><div class="no">01</div><h3>Hero Packshots</h3><p>Pristine studio product imagery for Shopify & Amazon. Zero photoshoot, unlimited angles.</p></div>
+    <div class="card"><div class="no">02</div><h3>Exploded-View Renders</h3><p>Virtually disassembled products that reveal internal engineering — for pitch decks & Kickstarter.</p></div>
+    <div class="card"><div class="no">03</div><h3>CMF Variant Matrix</h3><p>Every color, material & finish from one master model. Perfect consistency across the catalog.</p></div>
+    <div class="card"><div class="no">04</div><h3>Cinematic Ad Loops</h3><p>5–15s scroll-stopping motion for TikTok, Reels & Meta. Physics sims, studio camera. No crew.</p></div>
+  </div>
+</div></section>
+
+<section class="pad" id="work"><div class="wrap">
+  <div class="sec-kick">// PROOF // SELECTED WORK</div>
+  <h2 class="big">Selected Work</h2>
+  <div class="gal">
+    <div class="tile feat">
+      <div class="shot"><img src="work/serum_dinagat.jpg" alt="Dinagat serum packshot">
+        <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>DINAGAT SERUM</b> // COSMETICS_PACKSHOT</div>
+    </div>
+    <div class="tile"><div class="shot"><img src="work/products_final.jpg" alt="grocery product set render">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>GROCERY SET</b> // CPG_PACKSHOT</div></div>
+    <div class="tile"><div class="shot"><img src="work/products_wire.jpg" alt="grocery set wireframe topology">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>CLEAN TOPOLOGY</b> // WIREFRAME_PROOF</div></div>
+    <div class="tile"><div class="shot"><img src="work/keyboard.jpg" alt="keyboard render">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>MECH KEYBOARD</b> // ELECTRONICS</div></div>
+    <div class="tile"><div class="shot"><img src="work/earbuds_exploded.jpg" alt="earbuds exploded">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>EARBUDS</b> // EXPLODED_VIEW</div></div>
+    <div class="tile"><div class="shot"><img src="work/jersey.jpg" alt="basketball jersey mockup">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>JERSEY</b> // APPAREL_MOCKUP</div></div>
+    <div class="tile"><div class="shot"><img src="work/klx.jpg" alt="klx dual sport bike">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>KLX DUAL-SPORT</b> // VEHICLE</div></div>
+    <div class="tile"><div class="shot"><img src="work/warship.jpg" alt="warship diorama">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>CAPITOL WARSHIP</b> // ENVIRONMENT</div></div>
+    <div class="tile"><div class="shot"><img src="work/puzzle.jpg" alt="dinagat islands puzzle">
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>DINAGAT PUZZLE</b> // PRODUCT_DESIGN</div></div>
+  </div>
+
+  <div class="subhead">// MOTION // 3D REELS</div>
+  <div class="featreel"><div class="shot"><span class="badge">SHOWREEL // MOTION_GRAPHICS</span>
+    <video autoplay muted loop playsinline poster="work/reel4.jpg"><source src="work/reel4.mp4" type="video/mp4"></video>
+    <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+    <div class="workcap"><b>JURRY // 3D VISUALS</b> — BRANDED DRONE ANIMATION</div></div>
+  <div class="reels">
+    <div class="vtile"><div class="shot"><span class="badge">REEL_01 // PROCESS</span>
+      <video autoplay muted loop playsinline poster="work/reel1.jpg"><source src="work/reel1.mp4" type="video/mp4"></video>
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>WIREFRAME BUILD</b> // TERRAIN_PUZZLE</div></div>
+    <div class="vtile"><div class="shot"><span class="badge">REEL_02 // TURNTABLE</span>
+      <video autoplay muted loop playsinline poster="work/reel2.jpg"><source src="work/reel2.mp4" type="video/mp4"></video>
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>PRODUCT LOOP</b> // WOOD_BOWL</div></div>
+    <div class="vtile"><div class="shot"><span class="badge">REEL_03 // RIG</span>
+      <video autoplay muted loop playsinline poster="work/reel3.jpg"><source src="work/reel3.mp4" type="video/mp4"></video>
+      <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span></div>
+      <div class="workcap"><b>FIGURE + SCENE</b> // BASKETBALL</div></div>
+  </div>
+</div></section>
+
+<section class="pad" id="process"><div class="wrap">
+  <div class="sec-kick">// HOW I WORK</div>
+  <h2 class="big">Brief → Model → Render → Deliver</h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h4>BRIEF</h4><p>Product specs, references & goals.</p></div>
+    <div class="step"><div class="n">02</div><h4>MODEL</h4><p>Clean 3D master + materials.</p></div>
+    <div class="step"><div class="n">03</div><h4>RENDER</h4><p>Studio lighting, angles, motion.</p></div>
+    <div class="step"><div class="n">04</div><h4>DELIVER</h4><p>Web-ready assets & source files.</p></div>
+  </div>
+</div></section>
+
+<section class="pad" id="pricing"><div class="wrap">
+  <div class="sec-kick">// PACKAGES</div>
+  <h2 class="big">Flat-Rate. High-Ticket.</h2>
+  <div class="tiers">
+    <div class="tier"><div class="no">01</div><h3>Brand Launch Pack</h3><div class="price">$1,500–2,500</div><hr>
+      <li>1 master 3D model</li><li>5 hero packshots</li><li>Website visuals</li></div>
+    <div class="tier feat"><div class="no">02 // MOST POPULAR</div><h3>Commercial Variant Pack</h3><div class="price">$3,500–5,000</div><hr>
+      <li>Everything in Launch</li><li>Exploded-view renders</li><li>Full CMF matrix</li><li>2 lifestyle scenes</li></div>
+    <div class="tier"><div class="no">03</div><h3>Cinematic Ad Pack</h3><div class="price">$6,000+</div><hr>
+      <li>Everything above</li><li>Environment design</li><li>15s cinematic ad loop</li></div>
+  </div>
+</div></section>
+
+<section class="band" id="contact"><div class="wrap">
+  <div class="sec-kick">// LET'S TALK</div>
+  <h2>Let's Build Your<br>Product in 3D.</h2>
+  <div class="rule"></div>
+  <p class="sub" style="color:var(--hi)">Before you shoot it. Before you build it.</p>
+  <div class="contact">ayensajurry11@gmail.com&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;+63 970 620 6583</div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo mono" style="color:#fff">J-ANOS//GRAPHIX</div>
+  <div class="social">
+    <a href="https://www.instagram.com/jurrysdiction" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.86s0 3.6-.07 4.86c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.86.07s-3.6 0-4.86-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.86c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2Zm0 1.98c-3.15 0-3.52.01-4.76.07-.9.04-1.38.19-1.7.32-.43.16-.74.36-1.06.68-.32.32-.52.63-.68 1.06-.13.32-.28.8-.32 1.7-.06 1.24-.07 1.6-.07 4.76s.01 3.52.07 4.76c.04.9.19 1.38.32 1.7.16.43.36.74.68 1.06.32.32.63.52 1.06.68.32.13.8.28 1.7.32 1.24.06 1.6.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.38-.19 1.7-.32.43-.16.74-.36 1.06-.68.32-.32.52-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.6.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32-1.24-.06-1.6-.07-4.76-.07Zm0 3.37a4.45 4.45 0 1 1 0 8.9 4.45 4.45 0 0 1 0-8.9Zm0 7.34a2.89 2.89 0 1 0 0-5.78 2.89 2.89 0 0 0 0 5.78Zm5.66-7.56a1.04 1.04 0 1 1-2.08 0 1.04 1.04 0 0 1 2.08 0Z"/></svg></a>
+    <a href="https://www.facebook.com/profile.php?id=61568439451882" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14V8.5c0-.87.24-1.5 1.5-1.5H17V4.3c-.3-.04-1.3-.13-2.47-.13C12.07 4.17 10.5 5.7 10.5 8.2V10.5H8v3h2.5V21H14v-7.5Z"/></svg></a>
+    <a href="https://www.tiktok.com/@jurryyyyyyy" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.8c-.9-.6-1.5-1.5-1.7-2.6h-2.6v11.1c0 1.3-1 2.3-2.3 2.3-1.3 0-2.3-1-2.3-2.3 0-1.3 1-2.3 2.3-2.3.25 0 .5.04.72.11V9.4a5 5 0 0 0-.72-.05A5 5 0 1 0 15 14.3V8.7a6.3 6.3 0 0 0 3.7 1.2V7.3c-.75 0-1.5-.2-2.1-.55l-.02.05Z"/></svg></a>
+    <a href="https://www.linkedin.com/in/jurry-anos-847043420" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5A1.94 1.94 0 1 1 3 5a1.94 1.94 0 0 1 3.94 0ZM3.3 8.4h3.28V21H3.3V8.4Zm5.3 0h3.14v1.72h.05c.44-.83 1.5-1.72 3.1-1.72 3.32 0 3.93 2.18 3.93 5.02V21h-3.28v-6.14c0-1.46-.03-3.35-2.04-3.35-2.04 0-2.35 1.6-2.35 3.24V21H8.6V8.4Z"/></svg></a>
+    <a href="https://www.threads.com/@jurrysdiction" target="_blank" rel="noopener" aria-label="Threads" title="Threads"><svg viewBox="0 0 24 24"><path d="M12.2 21.5c-2.9-.02-5.13-.98-6.63-2.85C4.24 17 3.6 14.85 3.55 12.02v-.04c.05-2.83.7-4.98 2.02-6.63C7.07 3.48 9.3 2.52 12.2 2.5h.02c2.22.02 4.08.6 5.5 1.72 1.34 1.05 2.28 2.55 2.8 4.45l-1.93.53c-.88-3.18-3.13-4.8-6.38-4.83-2.28.02-4 .74-5.1 2.13-1.03 1.3-1.56 3.16-1.6 5.53.04 2.37.57 4.24 1.6 5.53 1.1 1.39 2.82 2.11 5.1 2.13 2.06-.02 3.42-.5 4.55-1.6.7-.68 1.1-1.53 1.24-2.5-.55-.32-1.2-.55-1.9-.68-.15 1.28-.72 2.7-2.9 2.7-1.32 0-2.45-.9-2.52-2.16-.08-1.55 1.34-2.42 3.2-2.42.5 0 .96.03 1.4.1v-.3c0-1.13-.6-1.75-1.72-1.76-.86 0-1.4.36-1.73.94l-1.7-.9c.66-1.16 1.85-1.82 3.42-1.82 2.1 0 3.5 1.28 3.55 3.4l.01.5c1.03.4 1.86 1 2.42 1.78l-.02.02c.66.9 1 2.02 1 3.32v.02C18.7 20.4 16.1 21.48 12.2 21.5Zm-.1-6.1c-1 0-1.55.42-1.52.98.03.5.55.86 1.2.86 1.08 0 1.45-.72 1.55-1.68a5.3 5.3 0 0 0-1.23-.16Z"/></svg></a>
+  </div>
+  <div class="mono">3D PRE-VISUALIZATION EXPERT // D2C &nbsp;·&nbsp; v2.0</div>
+</div></footer>
