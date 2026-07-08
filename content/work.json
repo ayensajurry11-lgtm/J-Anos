@@ -1,0 +1,105 @@
+{
+  "work": [
+    {
+      "type": "image",
+      "file": "serum_dinagat.jpg",
+      "alt": "Dinagat serum packshot",
+      "title": "DINAGAT SERUM",
+      "tag": "COSMETICS_PACKSHOT",
+      "featured": true
+    },
+    {
+      "type": "image",
+      "file": "products_final.jpg",
+      "alt": "grocery product set render",
+      "title": "GROCERY SET",
+      "tag": "CPG_PACKSHOT"
+    },
+    {
+      "type": "image",
+      "file": "products_wire.jpg",
+      "alt": "grocery set wireframe topology",
+      "title": "CLEAN TOPOLOGY",
+      "tag": "WIREFRAME_PROOF"
+    },
+    {
+      "type": "image",
+      "file": "keyboard.jpg",
+      "alt": "keyboard render",
+      "title": "MECH KEYBOARD",
+      "tag": "ELECTRONICS"
+    },
+    {
+      "type": "image",
+      "file": "earbuds_exploded.jpg",
+      "alt": "earbuds exploded",
+      "title": "EARBUDS",
+      "tag": "EXPLODED_VIEW"
+    },
+    {
+      "type": "image",
+      "file": "jersey.jpg",
+      "alt": "basketball jersey mockup",
+      "title": "JERSEY",
+      "tag": "APPAREL_MOCKUP"
+    },
+    {
+      "type": "image",
+      "file": "klx.jpg",
+      "alt": "klx dual sport bike",
+      "title": "KLX DUAL-SPORT",
+      "tag": "VEHICLE"
+    },
+    {
+      "type": "image",
+      "file": "warship.jpg",
+      "alt": "warship diorama",
+      "title": "CAPITOL WARSHIP",
+      "tag": "ENVIRONMENT"
+    },
+    {
+      "type": "image",
+      "file": "puzzle.jpg",
+      "alt": "dinagat islands puzzle",
+      "title": "DINAGAT PUZZLE",
+      "tag": "PRODUCT_DESIGN"
+    }
+  ],
+  "featReel": {
+    "file": "Sample_5-1.mp4",
+    "poster": "",
+    "badge": "SHOWREEL // MOTION_GRAPHICS",
+    "title": "JURRY // 3D VISUALS",
+    "tag": "BRANDED DRONE ANIMATION"
+  },
+  "reels": [
+    {
+      "file": "reel1.mp4",
+      "poster": "reel1.jpg",
+      "badge": "REEL_01 // PROCESS",
+      "title": "WIREFRAME BUILD",
+      "tag": "TERRAIN_PUZZLE"
+    },
+    {
+      "file": "reel2.mp4",
+      "poster": "reel2.jpg",
+      "badge": "REEL_02 // TURNTABLE",
+      "title": "PRODUCT LOOP",
+      "tag": "WOOD_BOWL"
+    },
+    {
+      "file": "reel3.mp4",
+      "poster": "reel3.jpg",
+      "badge": "REEL_03 // RIG",
+      "title": "FIGURE + SCENE",
+      "tag": "BASKETBALL"
+    },
+    {
+      "file": "video_2026-02-09_17-51-26.mp4",
+      "poster": "",
+      "badge": "REEL_04 // LANDSCAPE",
+      "title": "RACE TRACK",
+      "tag": "DRONE_SHOT"
+    }
+  ]
+}
