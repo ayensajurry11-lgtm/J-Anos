@@ -74,6 +74,13 @@
   },
   "reels": [
     {
+      "file": "0001-0090.mp4",
+      "poster": "",
+      "badge": "REEL_05 // FULL SPIN",
+      "title": "GADGETS",
+      "tag": "360_SPIN"
+    },
+    {
       "file": "reel1.mp4",
       "poster": "reel1.jpg",
       "badge": "REEL_01 // PROCESS",
@@ -100,13 +107,6 @@
       "badge": "REEL_04 // LANDSCAPE",
       "title": "RACE TRACK",
       "tag": "DRONE_SHOT"
-    },
-    {
-      "file": "0001-0090.mp4",
-      "poster": "",
-      "badge": "REEL_05 // FULL SPIN",
-      "title": "GADGETS",
-      "tag": "360"
     }
   ]
 }
