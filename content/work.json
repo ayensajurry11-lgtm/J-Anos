@@ -108,5 +108,41 @@
       "title": "RACE TRACK",
       "tag": "DRONE_SHOT"
     }
+  ],
+  "contact": {
+    "email": "ayensajurry11@gmail.com",
+    "phone": "+63 970 620 6583"
+  },
+  "social": [
+    {
+      "platform": "instagram",
+      "label": "INSTAGRAM",
+      "handle": "@jurrysdiction",
+      "url": "https://www.instagram.com/jurrysdiction"
+    },
+    {
+      "platform": "facebook",
+      "label": "FACEBOOK",
+      "handle": "J-Anos Graphix",
+      "url": "https://www.facebook.com/profile.php?id=61568439451882"
+    },
+    {
+      "platform": "tiktok",
+      "label": "TIKTOK",
+      "handle": "@jurryyyyyyy",
+      "url": "https://www.tiktok.com/@jurryyyyyyy"
+    },
+    {
+      "platform": "linkedin",
+      "label": "LINKEDIN",
+      "handle": "jurry-anos",
+      "url": "https://www.linkedin.com/in/jurry-anos-847043420"
+    },
+    {
+      "platform": "threads",
+      "label": "THREADS",
+      "handle": "@jurrysdiction",
+      "url": "https://www.threads.com/@jurrysdiction"
+    }
   ]
 }
